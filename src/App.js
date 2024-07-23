@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { count: 5 };
+    this.handlerDecrement = this.handlerDecrement.bind(this);
+    this.handlerIncrement = this.handlerIncrement.bind(this);
+  }
+  // ! class handler methods
+  //  1) Decrement test method
+  handlerDecrement() {
+    this.setState((curStat) => {
+      return { count: curStat.count > 0 ? curStat.count - 1 : curStat.count };
+    });
+  }
+  //  2) Increment test method
+  handlerIncrement() {
+    this.setState((curStat) => {
+      return { count: curStat.count + 1 };
+    });
+  }
+  // ! Render Method like the functional Component
+  render() {
+    return (
+      <div>
+        <button style={{ fontSize: "30px" }} onClick={this.handlerDecrement}>
+          ➖
+        </button>{" "}
+        <span style={{ fontSize: "30px" }}> {this.state.count} </span>{" "}
+        <button style={{ fontSize: "30px" }} onClick={this.handlerIncrement}>
+          ➕
+        </button>
+      </div>
+    );
+  }
 }
-
-export default App;
+export default Counter;
